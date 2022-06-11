@@ -72,5 +72,9 @@ class SignUpActivity : AppCompatActivity() {
                 etConfirm.error = "Confirm your details"
             }
 
+            if (Password!=Confirm){
+                tilPassword.error="Password does not match"
+            }
+
         }
 }

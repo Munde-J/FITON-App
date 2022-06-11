@@ -28,9 +28,12 @@ class LoginActivity : AppCompatActivity() {
         tvSignup = findViewById(R.id.tvSignup)
 
         btnLogin.setOnClickListener {
-            val intent=Intent(this,LoginActivity::class.java)
-            startActivity(intent)
             validateLogin()
+
+
+//            val intent=Intent(this,LoginActivity::class.java)
+//            startActivity(intent)
+//
 
         }
 
@@ -43,13 +46,20 @@ class LoginActivity : AppCompatActivity() {
     fun validateLogin(){
         var email = etEmail1.text.toString()
         var password = etPassword1.text.toString()
+        var error = false
 
         if (email.isBlank()){
             etEmail1.error = "Email required"
+            error = true
         }
 
         if (password.isBlank()){
-            etPassword1.error = "Password required"
+            etPassword1.error = getString(R.string.password_required)
+            error = true
+        }
+        if (!error){
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
     }
     }
