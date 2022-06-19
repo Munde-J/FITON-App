@@ -7,73 +7,59 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import dev.Jojo.example.workoutlog.databinding.ActivityHomeBinding
+import dev.Jojo.example.workoutlog.databinding.ActivityLoginBinding
+import dev.Jojo.example.workoutlog.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
-    lateinit var tilFirstName:TextInputLayout
-    lateinit var etFirstName:TextInputEditText
-    lateinit var tilSecondName:TextInputLayout
-    lateinit var etSecondName:TextInputEditText
-    lateinit var tilEmail:TextInputLayout
-    lateinit var etEmail:TextInputEditText
-    lateinit var tilPassword:TextInputLayout
-    lateinit var etPassword:TextInputEditText
-    lateinit var tilConfirm:TextInputLayout
-    lateinit var etConfirm:TextInputEditText
-    lateinit var btnSignup:Button
-    lateinit var tvLogin:TextView
+   lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tilFirstName = findViewById(R.id.tilFirstName)
-        etFirstName = findViewById(R.id.etFirstName)
-        tilSecondName = findViewById(R.id.tilSecondName)
-        etSecondName = findViewById(R.id.etSecondName)
-        tilEmail = findViewById(R.id.tilEmail)
-        etEmail = findViewById(R.id.etEmail1)
-        tilPassword = findViewById(R.id.tilPassword)
-        etPassword = findViewById(R.id.etPassword1)
-        tilConfirm = findViewById(R.id.tilConfirm)
-        etConfirm = findViewById(R.id.etConfirm)
-        btnSignup = findViewById(R.id.btnSignup)
 
-        btnSignup.setOnClickListener {
+        binding.btnSignup.setOnClickListener {
             val intent=Intent(this,SignUpActivity::class.java)
             startActivity(intent)
             validateSignUp()
         }
+        binding.tvLogin.setOnClickListener {
+            val intent=Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
         fun validateSignUp(){
-            var Firstname = etFirstName.text.toString()
-            var Secondname =etSecondName.text.toString()
-            var Email = etEmail.text.toString()
-            var Password =etPassword.text.toString()
-            var Confirm = etConfirm.text.toString()
+            var Firstname = binding.etFirstName.text.toString()
+            var Secondname =binding.etSecondName.text.toString()
+            var Email1 = binding.etEmail1.text.toString()
+            var Password =binding.etPassword1.text.toString()
+            var Confirm = binding.etConfirm.text.toString()
 
             if (Firstname.isBlank()){
-                etFirstName.error = "First Name required"
+                binding.etFirstName.error = "First Name required"
             }
 
             if (Secondname.isBlank()){
-                etSecondName.error = "Second Name required"
+                binding.etSecondName.error = "Second Name required"
             }
 
-            if (Email.isBlank()){
-                etEmail.error = "Email required"
+            if (Email1.isBlank()){
+                binding.etEmail1.error = "Email required"
             }
 
             if (Password.isBlank()){
-                etPassword.error = "Password required"
+                binding.etPassword1.error = "Password required"
             }
 
             if (Confirm.isBlank()){
-                etConfirm.error = "Confirm your details"
+                binding.etConfirm.error = "Confirm your details"
             }
 
             if (Password!=Confirm){
-                tilPassword.error="Password does not match"
+                binding.tilPassword.error="Password does not match"
             }
 
         }

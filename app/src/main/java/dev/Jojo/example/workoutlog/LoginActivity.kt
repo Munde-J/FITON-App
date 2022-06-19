@@ -7,54 +7,42 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
+import dev.Jojo.example.workoutlog.databinding.ActivityHomeBinding
+import dev.Jojo.example.workoutlog.databinding.ActivityLoginBinding
+import dev.Jojo.example.workoutlog.databinding.ActivitySignUpBinding
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var  btnLogin:Button
-    lateinit var tilEmail1:TextInputLayout
-    lateinit var tilPassword1:TextInputLayout
-    lateinit var etEmail1:EditText
-    lateinit var etPassword1:EditText
-    lateinit var tvSignup:TextView
+    lateinit var binding:ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnLogin = findViewById(R.id.btnLogin)
-        tilEmail1 = findViewById(R.id.tilEmail1)
-        tilPassword1 = findViewById(R.id.tilPassword1)
-        etEmail1 = findViewById(R.id.etEmail1)
-        etPassword1 =findViewById(R.id.etPassword1)
-        tvSignup = findViewById(R.id.tvSignup)
-
-        btnLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             validateLogin()
-
-
-//            val intent=Intent(this,LoginActivity::class.java)
-//            startActivity(intent)
-//
+            startActivity(Intent(this,HomeActivity::class.java))
+            finish()
 
         }
-
-        tvSignup.setOnClickListener {
-            val intent=Intent(this,SignUpActivity::class.java)
+        binding.tvSignup.setOnClickListener {
+            val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
-            validateLogin()
         }
+
     }
     fun validateLogin(){
-        var email = etEmail1.text.toString()
-        var password = etPassword1.text.toString()
+        var email = binding.etEmail1.text.toString()
+        var password = binding.etPassword1.text.toString()
         var error = false
 
         if (email.isBlank()){
-            etEmail1.error = "Email required"
+            binding.etEmail1.error = "Email required"
             error = true
         }
 
         if (password.isBlank()){
-            etPassword1.error = getString(R.string.password_required)
+            binding.etPassword1.error = "Password required"
             error = true
         }
         if (!error){
