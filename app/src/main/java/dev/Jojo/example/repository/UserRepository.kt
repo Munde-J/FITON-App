@@ -3,6 +3,7 @@ package dev.Jojo.example.repository
 import dev.Jojo.example.Api.ApiClient
 import dev.Jojo.example.Api.ApiInterface
 import dev.Jojo.example.workoutlog.models.LoginRequest
+import dev.Jojo.example.workoutlog.models.ProfileRequests
 import dev.Jojo.example.workoutlog.models.RegisterRequests
 import dev.Jojo.example.workoutlog.models.RegisterResponse
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +18,13 @@ class UserRepository{
         val response = apiClient.login(loginRequest)
         return@withContext response
     }
-    suspend fun registerUser(registerRequests: RegisterRequests):Response<RegisterResponse>
+    suspend fun registerUser(registerRequests: RegisterRequests)
     = withContext(Dispatchers.IO){
         val response=apiClient.registerUser(registerRequests)
+        return@withContext response
+    }
+    suspend fun profileUser(profileRequests: ProfileRequests)= withContext(Dispatchers.IO) {
+        val response = apiClient.profile(profileRequests)
         return@withContext response
     }
 }

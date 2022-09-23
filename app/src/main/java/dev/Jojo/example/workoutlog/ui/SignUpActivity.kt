@@ -88,13 +88,13 @@ class SignUpActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         userViewModel.registerResponseLiveData.observe(this, Observer {
-            signupResponse->
-            Toast.makeText(baseContext,signupResponse.message,Toast.LENGTH_LONG).show()
+            registerResponse->
+            Toast.makeText(baseContext,registerResponse.message,Toast.LENGTH_LONG).show()
             startActivity(Intent(baseContext, LoginActivity::class.java))
         })
         userViewModel.registerErrorLiveData.observe(this, Observer {
-            signupError->
-            Toast.makeText(baseContext,signupError,Toast.LENGTH_LONG).show()
+            errorMsg->
+            Toast.makeText(baseContext,errorMsg,Toast.LENGTH_LONG).show()
         })
     }
 }
